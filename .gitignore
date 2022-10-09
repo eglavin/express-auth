@@ -1,3 +1,5 @@
-**.env.local*
+**.env*
+!.env.example
+**/.docker/
 **/dist/
 **/node_modules/
