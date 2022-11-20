@@ -10,7 +10,7 @@ if (!SIGNATURE) {
   throw new Error("JWT_SIGNATURE is unset");
 }
 
-export function generateToken(user: Account) {
+export function generateToken(user: Account): string {
   return jwt.sign(
     {
       data: {
@@ -31,10 +31,7 @@ export const jwtMiddleware = expressjwt({
   algorithms: ["HS256"],
   // Assume the JWT will come in through the headers Authorization.
   getToken: function getTokenFromHeader(req) {
-    if (
-      req.headers.authorization &&
-      req.headers.authorization.split(" ")[0] === "Bearer"
-    ) {
+    if (req.headers.authorization && req.headers.authorization.split(" ")[0] === "Bearer") {
       return req.headers.authorization.split(" ")[1];
     }
   },
@@ -44,7 +41,7 @@ export async function attachUser(
   req: express.Request,
   res: express.Response,
   next: express.NextFunction
-) {
+): Promise<void> {
   const userData = await req.context.db?.manager
     .getRepository(Account)
     .createQueryBuilder("user")

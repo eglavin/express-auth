@@ -74,10 +74,7 @@ auth.post("/login", async function (req, res, next) {
       return;
     }
 
-    const correctPassword = await argon2.verify(
-      userData.password,
-      parseUser.data.password
-    );
+    const correctPassword = await argon2.verify(userData.password, parseUser.data.password);
     if (!correctPassword) {
       res.status(HttpStatusCode.UNAUTHORIZED).json({
         status: "Login failed",

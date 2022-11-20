@@ -1,11 +1,5 @@
 import { z } from "zod";
-import {
-  Column,
-  Entity,
-  OneToOne,
-  PrimaryGeneratedColumn,
-  Unique,
-} from "typeorm";
+import { Column, Entity, OneToOne, PrimaryGeneratedColumn, Unique } from "typeorm";
 import { Profile } from "./Profile";
 
 export const AccountSchema = z.object({

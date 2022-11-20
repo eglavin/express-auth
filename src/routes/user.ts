@@ -6,7 +6,7 @@ import { attachUser, jwtMiddleware } from "../utils/Jwt";
 
 const user = express.Router();
 
-user.get("/", jwtMiddleware, attachUser, function (req, res, next) {
+user.get("/", jwtMiddleware, attachUser, function (req, res) {
   res.status(HttpStatusCode.OK).json(req.currentUser);
 });
 
@@ -31,7 +31,7 @@ user.post("/", jwtMiddleware, attachUser, async function (req, res, next) {
       return;
     }
 
-    // profileEntity.user = req.currentUser!; // Add user relation to the profile
+    profileEntity.user = req.currentUser!; // Add user relation to the profile
 
     const saved = await profileRepo!.save(profileEntity);
 
