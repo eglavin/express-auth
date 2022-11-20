@@ -6,6 +6,19 @@ declare global {
       context: {
         db: DataSource | null;
       };
+      token?: {
+        data: {
+          id: number;
+          email: string;
+        };
+        iat: number;
+        exp: number;
+      };
+      currentUser?: {
+        id: string;
+        email: string;
+        profile: any;
+      };
     }
   }
 }

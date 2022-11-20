@@ -1,17 +1,19 @@
+import "dotenv/config";
+
 import express from "express";
 import http, { Server } from "http";
 import path from "path";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
-import dotenv from "dotenv";
 import "reflect-metadata";
 import { DataSource } from "typeorm";
 
 import { index } from "./routes/index";
-import { users } from "./routes/users";
-import { User } from "./users/entity";
+import { auth } from "./routes/auth";
+import { user } from "./routes/user";
 
-dotenv.config();
+import { Account } from "./models/Account";
+import { Profile } from "./models/Profile";
 
 async function createDBConnection() {
   try {
@@ -27,7 +29,7 @@ async function createDBConnection() {
       logging: "all",
 
       synchronize: true,
-      entities: [User],
+      entities: [Account, Profile],
     });
 
     await dataSource.initialize();
@@ -61,12 +63,14 @@ async function createServer(host: string, port: number): Promise<Server> {
 
   // Define routes
   app.use("/", index);
-  app.use("/users", users);
+  app.use("/auth", auth);
+  app.use("/user", user);
 
   // Catch all and return 500 server error
   app.use(function (_req, res) {
-    res.status(500);
-    res.send("Internal Server Error");
+    res.status(500).json({
+      status: "Internal Server Error",
+    });
   });
 
   return http
