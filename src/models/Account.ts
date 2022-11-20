@@ -24,5 +24,5 @@ export class Account implements z.infer<typeof AccountSchema> {
   password: string;
 
   @OneToOne(() => Profile, (profile) => profile.user)
-  profile: Partial<Profile>;
+  profile: Partial<Profile> | null;
 }

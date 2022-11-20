@@ -31,13 +31,30 @@ user.post("/", jwtMiddleware, attachUser, async function (req, res, next) {
       return;
     }
 
-    profileEntity.user = req.currentUser!; // Add user relation to the profile
+    // Add current user to the profile
+    profileEntity.user = {
+      ...req.currentUser!,
+    };
 
-    const saved = await profileRepo!.save(profileEntity);
+    // Add existing profile id if updating
+    if (req.currentUser?.profile?.id) {
+      profileEntity.id = req.currentUser.profile.id;
+    }
 
-    res.status(HttpStatusCode.ACCEPTED).json({
-      status: "Profile created",
-      profile: saved,
+    const saved = await profileRepo?.save(profileEntity);
+    if (!saved) {
+      res.status(HttpStatusCode.BAD_REQUEST).json({
+        status: "Unable to save profile",
+      });
+      return;
+    }
+
+    // Remove old profile data from response
+    saved.user.profile = null;
+
+    res.status(HttpStatusCode.OK).json({
+      status: req.currentUser?.profile?.id ? "Profile updated" : "Profile created",
+      data: saved,
     });
   } catch (error) {
     next(error);
