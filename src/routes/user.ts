@@ -32,7 +32,7 @@ user.post("/", jwtMiddleware, attachUser, async function (req, res, next) {
     }
 
     // Add current user to the profile
-    profileEntity.user = {
+    profileEntity.account = {
       ...req.currentUser!,
     };
 
@@ -50,7 +50,7 @@ user.post("/", jwtMiddleware, attachUser, async function (req, res, next) {
     }
 
     // Remove old profile data from response
-    saved.user.profile = null;
+    saved.account.profile = null;
 
     res.status(HttpStatusCode.OK).json({
       status: req.currentUser?.profile?.id ? "Profile updated" : "Profile created",

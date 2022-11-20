@@ -13,7 +13,7 @@ auth.post("/register", async function (req, res, next) {
     if (!parseUser.success) {
       res.status(HttpStatusCode.BAD_REQUEST).json({
         error: parseUser.error,
-        status: "Unable to parse user",
+        status: "Unable to parse account",
       });
       return;
     }
@@ -25,7 +25,7 @@ auth.post("/register", async function (req, res, next) {
     });
     if (existingUser) {
       res.status(HttpStatusCode.CONFLICT).json({
-        status: "User already exists",
+        status: "Account already exists",
       });
       return;
     }
@@ -39,13 +39,13 @@ auth.post("/register", async function (req, res, next) {
 
     if (!savedState) {
       res.status(HttpStatusCode.BAD_REQUEST).json({
-        status: "Unable to save user",
+        status: "Unable to save account",
       });
       return;
     }
 
     res.status(HttpStatusCode.CREATED).json({
-      status: "User created",
+      status: "Account created",
     });
   } catch (error) {
     next(error);

@@ -63,7 +63,7 @@ export class Profile implements z.infer<typeof ProfileSchema> {
   })
   dateOfBirth: string | null;
 
-  @OneToOne(() => Account, (user) => user.profile)
+  @OneToOne(() => Account, (account) => account.profile)
   @JoinColumn()
-  user: Partial<Account>;
+  account: Partial<Account>;
 }
