@@ -8,7 +8,10 @@
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
-    "lib": ["DOM", "ES2016"],
+    "lib": [
+      "DOM",
+      "ES2016"
+    ],
     "module": "CommonJS",
     "moduleResolution": "Node",
     "outDir": "./build",
@@ -19,6 +22,12 @@
     "target": "ES2016",
     "types": []
   },
-  "include": ["./@types", "./src"],
-  "exclude": ["node_modules", "build"]
+  "include": [
+    "./@types",
+    "./src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "build"
+  ]
 }

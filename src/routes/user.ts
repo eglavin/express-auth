@@ -2,7 +2,7 @@ import express from "express";
 import { Profile, ProfileSchema } from "../models/Profile";
 
 import { HttpStatusCode } from "../utils/HttpStatusCode";
-import { attachUser, jwtMiddleware } from "../utils/Jwt";
+import { attachUser, jwtMiddleware } from "../utils/JWT";
 
 const user = express.Router();
 

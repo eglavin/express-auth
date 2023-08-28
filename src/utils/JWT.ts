@@ -21,7 +21,7 @@ export function generateToken(account: Account): string {
     SIGNATURE,
     {
       expiresIn: "6h",
-    }
+    },
   );
 }
 
@@ -40,7 +40,7 @@ export const jwtMiddleware = expressjwt({
 export async function attachUser(
   req: express.Request,
   res: express.Response,
-  next: express.NextFunction
+  next: express.NextFunction,
 ): Promise<void> {
   const userData = await req.context.db?.manager
     .getRepository(Account)

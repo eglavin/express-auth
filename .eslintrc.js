@@ -34,16 +34,16 @@ module.exports = {
    * "error" or 2 - turn the rule on as an error (exit code is 1 when triggered)
    */
   rules: {
+    "no-console": 0,
+    "no-constant-condition": 1,
+    "no-empty-function": 1,
+    "no-unused-vars": 0,
     "@typescript-eslint/explicit-module-boundary-types": 1,
     "@typescript-eslint/no-empty-function": 1,
     "@typescript-eslint/no-empty-interface": 0,
     "@typescript-eslint/no-explicit-any": 1,
     "@typescript-eslint/no-non-null-assertion": 0,
     "@typescript-eslint/no-unused-vars": [1, { ignoreRestSiblings: true, argsIgnorePattern: "^_" }],
-    "no-console": 0,
-    "no-constant-condition": 1,
-    "no-empty-function": 1,
-    "no-unused-vars": 0,
     "prettier/prettier": [1, { endOfLine: "auto" }],
   },
 };
