@@ -10,6 +10,7 @@
     "db:stop": "docker-compose -f docker-compose.dev.yml stop",
     "db:remove": "docker-compose -f docker-compose.dev.yml rm"
   },
+  "packageManager": "pnpm@8.15.9",
   "dependencies": {
     "argon2": "0.31.0",
     "cookie-parser": "1.4.6",
